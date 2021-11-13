@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word hint</title>
+    <style>
+        #words {
+            margin: 1em auto;
+            width: 40em;
+            font-family: monospace;
+            font-size: 1em;
+        }
+        #searchWord {
+            display: block;
+            width: 32em;
+            margin: 1em auto;
+            padding: 1em;
+            font-family: monospace;
+            font-size: 1.5em;
+        }
+        #searchWord:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <input id="searchWord" type="text"/>
+    <div id="words"></div>
+
+    <script>
+        const wordsList = document.querySelector('#words');
+        const searchWord = document.querySelector('#searchWord');
+
+        searchWord.addEventListener('input', async e => {
+            const text = e.target.value;
+            const query = text.split(/[\s\.,]+/).pop();
+
+            if (query === '') {
+                wordsList.innerHTML = '';
+                return;
+            }
+
+            const res = await fetch(`/suggestions?query=${query}&limit=20`);
+
+            if (!res.ok) {
+                const msg = await res.text();;
+                wordsList.innerHTML = 'Error. ' + msg;
+
+            }
+
+            let words = await res.json();
+            let htmlText = '';
+            for(const i in words) {
+                htmlText += `${words[i]}<br />`
+            }
+            wordsList.innerHTML = htmlText;
+        });
+    </script>
+</body>
+</html>

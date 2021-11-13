@@ -3,5 +3,15 @@
 
 ## How ot build
 ```
-WORDS_FILE_PATH=src/test/resources/fixtures/ordered-words-test-set ./mvnw clean verify
+./mvnw clean verify
+```
+
+## How to run. Runs with default words set
+```
+java -jar target/demo-0.0.1-SNAPSHOT.jar
+```
+
+## Run with your words
+```
+WORDS_FILE_PATH=<path-to-your-file> java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
