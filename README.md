@@ -21,3 +21,6 @@ WORDS_FILE_PATH=<path-to-your-file> java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
 docker-compose up -d
 ```
+
+## demo
+Open in browser http://localhost:8080
