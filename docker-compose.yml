@@ -1,0 +1,10 @@
+version: '3'
+services:
+  hints:
+    image: nosph/hints:1.0
+    ports:
+      - 8080:8080
+#    volumes:
+#      - <your dir with your file>:/app/data
+#    environment:
+#      - WORDS_FILE_PATH=/app/data/<your filename>

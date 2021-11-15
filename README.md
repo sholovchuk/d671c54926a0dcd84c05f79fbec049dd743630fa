@@ -15,3 +15,9 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
 WORDS_FILE_PATH=<path-to-your-file> java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
+
+
+## Or use docker
+```
+docker-compose up -d
+```

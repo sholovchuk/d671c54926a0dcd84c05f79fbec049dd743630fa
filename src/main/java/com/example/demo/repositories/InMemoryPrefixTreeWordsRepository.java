@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
-import com.example.demo.services.NextChars;
-
 public class InMemoryPrefixTreeWordsRepository implements WordsRepository {
 
     private Map<Character, NextChars> rootChars = new TreeMap<>();;
@@ -86,5 +84,28 @@ public class InMemoryPrefixTreeWordsRepository implements WordsRepository {
             recursivelyCollectWords(symbolPath.append(symbol), nextChar.getNextChar(symbol), words, limit);
         }
         symbolPath.deleteCharAt(symbolPath.length() - 1);
+    }
+
+    private static class NextChars {
+
+        private final boolean isWord;
+        private final Map<Character, NextChars> nextChars;
+
+        public NextChars(boolean isWord) {
+            this.isWord = isWord;
+            this.nextChars = new TreeMap<>();
+        }
+
+        public boolean isWord() {
+            return isWord;
+        }
+
+        public Map<Character, NextChars> getNextChars() {
+            return nextChars;
+        }
+
+        public NextChars getNextChar(char nextChar) {
+            return nextChars.get(nextChar);
+        }
     }
 }

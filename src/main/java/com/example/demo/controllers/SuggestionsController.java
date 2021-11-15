@@ -28,7 +28,7 @@ public class SuggestionsController {
             return new ResponseEntity<>(String.format("Query must match pattern /%s/, but got = %s", correctQuery.pattern(),  query), HttpStatus.BAD_REQUEST);
         }
 
-        if (inRange(limit, LOWER_BOUND, UPPER_BOUND)) {
+        if (inNotRange(limit, LOWER_BOUND, UPPER_BOUND)) {
             return new ResponseEntity<>(String.format("Expecting limit to be in range [%d, %d], but got = %d", LOWER_BOUND, UPPER_BOUND, limit), HttpStatus.BAD_REQUEST);
         }
 
@@ -39,7 +39,7 @@ public class SuggestionsController {
         return !correctQuery.matcher(query).matches();
     }
 
-    private boolean inRange(int limit, int lower, int upper) {
+    private boolean inNotRange(int limit, int lower, int upper) {
         return limit < lower || limit > upper;
     }
 }
